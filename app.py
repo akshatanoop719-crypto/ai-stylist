@@ -3,7 +3,7 @@
 
 import os
 
-# ---- SAFE IMPORTS (prevents crash if not installed) ----
+# ---- SAFE IMPORTS ----
 try:
     import streamlit as st
 except ImportError:
@@ -13,14 +13,12 @@ try:
     import numpy as np
     import cv2
 except ImportError:
-    import streamlit as st
     st.error("❌ OpenCV or NumPy not installed. Fix requirements.txt")
     st.stop()
 
-# ❌ Removed OpenAI (no payment needed)
-# We'll use smart rule-based AI instead 😈
-
 # ---- INPUT ----
+st.title("👗 AI Stylist PRO 😈")
+
 uploaded_file = st.file_uploader("Upload your selfie", type=["jpg", "png", "jpeg"])
 
 occasion = st.selectbox(
@@ -47,6 +45,10 @@ def estimate_skin_tone(face_region):
         return "medium"
     else:
         return "dark"
+
+# ---- DEFAULT VALUES (IMPORTANT FIX) ----
+face_shape = "unknown"
+skin_tone = "unknown"
 
 # ---- PROCESS ----
 if uploaded_file:
@@ -82,8 +84,6 @@ if uploaded_file:
 
     else:
         st.warning("Face not clear 😅")
-        face_shape = "unknown"
-        skin_tone = "unknown"
 
     # DISPLAY
     st.subheader("📸 Original")
@@ -96,39 +96,40 @@ if uploaded_file:
     st.write(f"Face Shape: {face_shape}")
     st.write(f"Skin Tone: {skin_tone}")
 
-    if st.button("Generate Glow Up 🔥"):
-        st.subheader("🔥 AI Advice")
+# ---- AI BUTTON (OUTSIDE SO NO NAME ERROR) ----
+if st.button("Generate Glow Up 🔥"):
+    st.subheader("🔥 AI Advice")
 
-        # ---- FREE AI LOGIC ----
-advice = ""
+    advice = ""
 
-# Face shape based suggestions
-if face_shape == "round":
-    advice += "• Try sharp hairstyles (fade, undercut) to add angles.\n"
-elif face_shape == "oval":
-    advice += "• Most hairstyles suit you 😎 try textured or messy styles.\n"
-else:
-    advice += "• Medium length hair with volume works best.\n"
+    # Face shape
+    if face_shape == "round":
+        advice += "• Try sharp hairstyles (fade, undercut) to add angles.\n"
+    elif face_shape == "oval":
+        advice += "• Most hairstyles suit you 😎 try textured or messy styles.\n"
+    else:
+        advice += "• Medium length hair with volume works best.\n"
 
-# Skin tone based suggestions
-if skin_tone == "light":
-    advice += "• Dark colors like black, navy, maroon look 🔥\n"
-elif skin_tone == "medium":
-    advice += "• Earth tones (olive, brown, beige) suit you well 🌿\n"
-else:
-    advice += "• Bright colors (white, yellow, pastel) pop on you ✨\n"
+    # Skin tone
+    if skin_tone == "light":
+        advice += "• Dark colors like black, navy, maroon look 🔥\n"
+    elif skin_tone == "medium":
+        advice += "• Earth tones (olive, brown, beige) suit you well 🌿\n"
+    else:
+        advice += "• Bright colors (white, yellow, pastel) pop on you ✨\n"
 
-# Occasion based suggestions
-if occasion == "Party":
-    advice += "• Go for stylish jacket + sneakers combo 😈\n"
-elif occasion == "Formal":
-    advice += "• Try clean shirt + blazer look 💼\n"
-elif occasion == "Wedding":
-    advice += "• Traditional or classy suit look 💍\n"
-elif occasion == "College":
-    advice += "• Casual hoodie + jeans vibe 🎧\n"
-else:
-    advice += "• Keep it chill with t-shirt + jeans 😎\n"
+    # Occasion
+    if occasion == "Party":
+        advice += "• Go for stylish jacket + sneakers combo 😈\n"
+    elif occasion == "Formal":
+        advice += "• Try clean shirt + blazer look 💼\n"
+    elif occasion == "Wedding":
+        advice += "• Traditional or classy suit look 💍\n"
+    elif occasion == "College":
+        advice += "• Casual hoodie + jeans vibe 🎧\n"
+    else:
+        advice += "• Keep it chill with t-shirt + jeans 😎\n"
 
-st.write(advice)
+    st.write(advice)
+
 print("✅ CLEAN VERSION READY 🚀")

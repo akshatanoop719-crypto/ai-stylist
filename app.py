@@ -100,47 +100,35 @@ if uploaded_file:
         st.subheader("🔥 AI Advice")
 
         # ---- FREE AI LOGIC ----
-        advice = ""
+advice = ""
 
-        # Face shape based suggestions
-        if face_shape == "round":
-            advice += "• Try sharp hairstyles (fade, undercut) to add angles.
-"
-        elif face_shape == "oval":
-            advice += "• Most hairstyles suit you 😎 try textured or messy styles.
-"
-        else:
-            advice += "• Medium length hair with volume works best.
-"
+# Face shape based suggestions
+if face_shape == "round":
+    advice += "• Try sharp hairstyles (fade, undercut) to add angles.\n"
+elif face_shape == "oval":
+    advice += "• Most hairstyles suit you 😎 try textured or messy styles.\n"
+else:
+    advice += "• Medium length hair with volume works best.\n"
 
-        # Skin tone based suggestions
-        if skin_tone == "light":
-            advice += "• Dark colors like black, navy, maroon look 🔥
-"
-        elif skin_tone == "medium":
-            advice += "• Earth tones (olive, brown, beige) suit you well 🌿
-"
-        else:
-            advice += "• Bright colors (white, yellow, pastel) pop on you ✨
-"
+# Skin tone based suggestions
+if skin_tone == "light":
+    advice += "• Dark colors like black, navy, maroon look 🔥\n"
+elif skin_tone == "medium":
+    advice += "• Earth tones (olive, brown, beige) suit you well 🌿\n"
+else:
+    advice += "• Bright colors (white, yellow, pastel) pop on you ✨\n"
 
-        # Occasion based suggestions
-        if occasion == "Party":
-            advice += "• Go for stylish jacket + sneakers combo 😈
-"
-        elif occasion == "Formal":
-            advice += "• Try clean shirt + blazer look 💼
-"
-        elif occasion == "Wedding":
-            advice += "• Traditional or classy suit look 💍
-"
-        elif occasion == "College":
-            advice += "• Casual hoodie + jeans vibe 🎧
-"
-        else:
-            advice += "• Keep it chill with t-shirt + jeans 😎
-"
+# Occasion based suggestions
+if occasion == "Party":
+    advice += "• Go for stylish jacket + sneakers combo 😈\n"
+elif occasion == "Formal":
+    advice += "• Try clean shirt + blazer look 💼\n"
+elif occasion == "Wedding":
+    advice += "• Traditional or classy suit look 💍\n"
+elif occasion == "College":
+    advice += "• Casual hoodie + jeans vibe 🎧\n"
+else:
+    advice += "• Keep it chill with t-shirt + jeans 😎\n"
 
-        st.write(advice)
-
+st.write(advice)
 print("✅ CLEAN VERSION READY 🚀")
